@@ -14,6 +14,8 @@ function App() {
   const [text, setText] = useState("");
   const [currentData, setCurrentData] = useState();
   const [HourlyData, setHourlyData] = useState();
+  const [DailyData, setDailyData] = useState();
+
   const [FetchByIdData, setFetchByIdData] = useState();
   const [EventData, setEventData] = useState();
   const [initial,setInitial] = useState(true);
@@ -28,6 +30,7 @@ function App() {
     setCurrentData(res2.current);
     setHourlyData(res2.hourly);
     setEventData(res2.alerts )
+    setDailyData(res2.daily)
     setShowDrop(false);
     setText("")
   };
@@ -63,6 +66,8 @@ console.log(showdrop)
   console.log("HourlyData", HourlyData);
   console.log("FetchByIdData", FetchByIdData);
   console.log("EventData", EventData);
+  console.log("DailyData", DailyData);
+
 
   return (
     <div className="App">
@@ -82,6 +87,7 @@ console.log(showdrop)
       />
       {HourlyData && <ForeCast 
       HourlyData={HourlyData}
+      DailyData={DailyData}
       />
       }
       

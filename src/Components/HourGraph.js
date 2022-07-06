@@ -3,7 +3,7 @@ import axios from "axios";
 import { Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 
-const TestingArea = ({ HourlyData }) => {
+const HourGraph = ({ HourlyData }) => {
 
 if(HourlyData !== undefined) {
     let FilteredData = HourlyData.slice(0,8)
@@ -36,4 +36,4 @@ if(HourlyData !== undefined) {
   );
 };
 
-export default TestingArea;
+export default HourGraph;
