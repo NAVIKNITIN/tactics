@@ -23,14 +23,27 @@ if(HourlyData !== undefined) {
         data: (FilteredData.map((el)=>el.temp)),
         fill: true,
         borderColor: 'rgb(54, 162, 235)',
-      }]
+      }],
+      options: {
+        scales: {
+            y: {
+                ticks: {
+                    // Include a dollar sign in the ticks
+                    callback: function(value, index, ticks) {
+                        return value + " °C";
+                    }
+                }
+            }
+        }
+    }
+     
   };
 
 }
   return (
     <div className="chartjs">
       <div className="bar">
-        <Bar data={datas} style={{width:"100%",overflow:"scroll"}}></Bar>
+        <Bar data={datas} style={{width:"100%",overflow:"scroll"}} options={datas.options}></Bar>
       </div>
     </div>
   );

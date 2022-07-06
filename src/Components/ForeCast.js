@@ -18,9 +18,6 @@ const ForeCast = ({ HourlyData, DailyData ,showdrop}) => {
     setData("");
     setclassActive("");
   };
-  useEffect(() => {
-    
-  }, [HourlyData])
 
   console.log(Data, `Data`);
   if (HourlyData) {
