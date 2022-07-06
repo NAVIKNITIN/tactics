@@ -7,7 +7,6 @@ import Current from "./Components/Current";
 import ForeCast from "./Components/ForeCast";
 
 function App() {
-
   const [selectedCountry, setSelectedCountry] = useState("");
   const [city, setCity] = useState("");
   const [showdrop, setShowDrop] = useState(false);
@@ -18,23 +17,22 @@ function App() {
 
   const [FetchByIdData, setFetchByIdData] = useState();
   const [EventData, setEventData] = useState();
-  const [initial,setInitial] = useState(true);
+  const [initial, setInitial] = useState(true);
 
-
- const FetchInitialData = async () => {
-  setInitial(false)
+  const FetchInitialData = async () => {
+    setInitial(false);
 
     let response = await fetchById();
     setFetchByIdData(response);
     let res2 = await fetchByLatLon(response);
     setCurrentData(res2.current);
     setHourlyData(res2.hourly);
-    setEventData(res2.alerts )
-    setDailyData(res2.daily)
+    setEventData(res2.alerts);
+    setDailyData(res2.daily);
     setShowDrop(false);
-    setText("")
+    setText("");
   };
-  if(initial){
+  if (initial) {
     FetchInitialData();
   }
 
@@ -49,7 +47,7 @@ function App() {
       setShowDrop(true);
     }
   };
-console.log(showdrop)
+  console.log(showdrop);
   const onSelectCity = async (e) => {
     setSelectedCountry(e.target.value);
     let response = await fetchById(e.target.value);
@@ -57,9 +55,9 @@ console.log(showdrop)
     let res2 = await fetchByLatLon(response);
     setCurrentData(res2.current);
     setHourlyData(res2.hourly);
-    setEventData(res2.alerts)
+    setEventData(res2.alerts);
     setShowDrop(false);
-    setText("")
+    setText("");
   };
 
   console.log("currentData", currentData);
@@ -67,7 +65,6 @@ console.log(showdrop)
   console.log("FetchByIdData", FetchByIdData);
   console.log("EventData", EventData);
   console.log("DailyData", DailyData);
-
 
   return (
     <div className="App">
@@ -80,17 +77,12 @@ console.log(showdrop)
         setText={setText}
         showdrop={showdrop}
       />
-      <Current 
-      currentData={currentData ? currentData : undefined} 
-      FetchByIdData={FetchByIdData}
-      EventData={EventData}
+      <Current
+        currentData={currentData ? currentData : undefined}
+        FetchByIdData={FetchByIdData}
+        EventData={EventData}
       />
-      {HourlyData && <ForeCast 
-      HourlyData={HourlyData}
-      DailyData={DailyData}
-      />
-      }
-      
+      {HourlyData && <ForeCast HourlyData={HourlyData} DailyData={DailyData} />}
     </div>
   );
 }

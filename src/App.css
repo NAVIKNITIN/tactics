@@ -68,3 +68,10 @@
 .Nav-Head{
   height: 2rem;
 }
+.btn-active{
+  font-weight: 700;
+}
+
+.accordion-item ::-webkit-scrollbar{
+  display: none;
+}

@@ -33,7 +33,7 @@ const Current = ({ currentData, FetchByIdData, EventData }) => {
             </button>
           )}
 
-          <div className="CurrentDataMain">
+          <div >
             <h6>
               Feels like{" "}
               {`${Math.round(currentData.feels_like)}\xB0C. ${

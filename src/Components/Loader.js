@@ -2,7 +2,7 @@ import React from 'react'
 
 const Loader = () => {
   return (
-    <div>
+    <div >
         <div class="spinner-grow text-primary" role="status">
           <span class="sr-only">{"  "}</span>
         </div>
