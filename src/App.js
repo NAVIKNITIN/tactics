@@ -15,7 +15,24 @@ function App() {
   const [HourlyData, setHourlyData] = useState();
   const [FetchByIdData, setFetchByIdData] = useState();
   const [EventData, setEventData] = useState();
+  const [initial,setInitial] = useState(true);
 
+
+ const FetchInitialData = async () => {
+  setInitial(false)
+
+    let response = await fetchById();
+    setFetchByIdData(response);
+    let res2 = await fetchByLatLon(response);
+    setCurrentData(res2.current);
+    setHourlyData(res2.hourly);
+    setEventData(res2.alerts)
+    setShowDrop(false);
+    setText("")
+  };
+  if(initial){
+    FetchInitialData();
+  }
 
   const onSubmitSearch = async (e) => {
     let data = { text: text, page: 1 };
