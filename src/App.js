@@ -7,6 +7,7 @@ import Current from "./Components/Current";
 import ForeCast from "./Components/ForeCast";
 
 function App() {
+
   const [selectedCountry, setSelectedCountry] = useState("");
   const [city, setCity] = useState("");
   const [showdrop, setShowDrop] = useState(false);
@@ -26,7 +27,7 @@ function App() {
     let res2 = await fetchByLatLon(response);
     setCurrentData(res2.current);
     setHourlyData(res2.hourly);
-    setEventData(res2.alerts)
+    setEventData(res2.alerts )
     setShowDrop(false);
     setText("")
   };
@@ -79,9 +80,11 @@ console.log(showdrop)
       FetchByIdData={FetchByIdData}
       EventData={EventData}
       />
-      <ForeCast 
+      {HourlyData && <ForeCast 
       HourlyData={HourlyData}
       />
+      }
+      
     </div>
   );
 }

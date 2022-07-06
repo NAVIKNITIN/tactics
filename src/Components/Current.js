@@ -1,7 +1,8 @@
 import React from "react";
 import moment from "moment";
+import Loader from "./Loader";
 const Current = ({ currentData, FetchByIdData, EventData }) => {
-  console.log(currentData);
+  console.log(EventData);
 
   if (currentData) {
     var CurrentFormatedDate = moment().format("MMMM Do YYYY, h:mm:ss a");
@@ -12,7 +13,12 @@ const Current = ({ currentData, FetchByIdData, EventData }) => {
           <h3>
             {FetchByIdData.name} {" , "} {FetchByIdData.sys.country}
           </h3>
-          <h1>{`${Math.round(currentData.temp)}\xB0C`}</h1>
+          <h1>
+            <img
+              src={`http://openweathermap.org/img/wn/${currentData.weather[0].icon}@2x.png`}
+            ></img>
+            {`${Math.round(currentData.temp)}\xB0C`}
+          </h1>
           {EventData && (
             <button
               style={{
@@ -22,7 +28,7 @@ const Current = ({ currentData, FetchByIdData, EventData }) => {
                 border: "none",
               }}
             >
-              {EventData.event}
+              {EventData ? EventData[0].event : ""}
             </button>
           )}
 
@@ -33,19 +39,51 @@ const Current = ({ currentData, FetchByIdData, EventData }) => {
                 currentData.weather[0].description
               }`}
             </h6>
-            <div style={{display:"flex",flexWrap:"wrap",flexDirection:"column"}}>
-                <div className="d-flex" style={{justifyContent:"center",gap:"2rem"}}>
-                <p className="m-0">{currentData.wind_speed ? (`${currentData.wind_speed}m/s  `) : ""}WSW</p>
-                <p className="m-0">{currentData.pressure? (`${currentData.pressure}h `) :""}Pa</p>
-                </div>
-                <div className="d-flex" style={{justifyContent:"center",gap:"2rem"}}>
-                <p className="m-0">Humidity:{currentData.humidity ? (` ${ currentData.humidity}%`): ""}</p>
-                <p className=" m-0">UV:{currentData.uvi ? currentData.uvi :""}</p>
-                </div>
-                <div className="d-flex" style={{justifyContent:"center",gap:"2rem"}}>
-                <p className="m-0">Dew point:{currentData.dew_point ? currentData.dew_point :""}</p>
-                <p className="m-0">Visibility : {currentData.visibility ? currentData.visibility : ""}</p>
-                </div>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                flexDirection: "column",
+              }}
+            >
+              <div
+                className="d-flex"
+                style={{ justifyContent: "center", gap: "2rem" }}
+              >
+                <p className="m-0">
+                  {currentData.wind_speed
+                    ? `${currentData.wind_speed}m/s  `
+                    : ""}
+                  WSW
+                </p>
+                <p className="m-0">
+                  {currentData.pressure ? `${currentData.pressure}h ` : ""}Pa
+                </p>
+              </div>
+              <div
+                className="d-flex"
+                style={{ justifyContent: "center", gap: "2rem" }}
+              >
+                <p className="m-0">
+                  Humidity:
+                  {currentData.humidity ? ` ${currentData.humidity}%` : ""}
+                </p>
+                <p className=" m-0">
+                  UV:{currentData.uvi ? currentData.uvi : ""}
+                </p>
+              </div>
+              <div
+                className="d-flex"
+                style={{ justifyContent: "center", gap: "2rem" }}
+              >
+                <p className="m-0">
+                  Dew point:{currentData.dew_point ? currentData.dew_point : ""}
+                </p>
+                <p className="m-0">
+                  Visibility :{" "}
+                  {currentData.visibility ? currentData.visibility : ""}
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -54,10 +92,8 @@ const Current = ({ currentData, FetchByIdData, EventData }) => {
     );
   } else {
     return (
-      <>
-        <h1>Current ELSE</h1>
-      </>
-    );
+        <Loader />
+            );
   }
 };
 

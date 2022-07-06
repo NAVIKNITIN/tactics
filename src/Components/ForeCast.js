@@ -5,15 +5,19 @@ import TestingArea from "./TestingArea";
 const ForeCast = ({ HourlyData }) => {
   if(HourlyData){
     return (
-      <div className="grid-container d-flex">
+      <div className="d-flex">
         <div className="chartjs col-md-6">
           <div className="bar">
-            <h3>Hourly Forecast</h3>
-            <TestingArea  HourlyData={HourlyData}/>
+            <h3 style={{display:"flex",marginLeft:"3rem"}}>Hourly Forecast</h3>
+            <div style={{display:"grid",marginLeft:"3rem"}} >
+            <TestingArea HourlyData={HourlyData}/>
+            </div>
+            
           </div>
         </div>
         <div className="col-md-6">
-          <h3>8 days forecast</h3>
+          <h3 style={{display:"flex",marginLeft:"3rem"}}>8-days forecast</h3>
+          
         </div>
       </div>
     );

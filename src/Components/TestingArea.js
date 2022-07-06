@@ -4,26 +4,23 @@ import { Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 
 const TestingArea = ({ HourlyData }) => {
-  const [POP, setPOP] = useState("");
-  const [TEMP, setTEMP] = useState("");
-  const [DESCRIPTION, setDESCRIPTION] = useState("");
 
 if(HourlyData !== undefined) {
-
+    let FilteredData = HourlyData.slice(0,8)
   var datas = {
     labels: 
-        (HourlyData.map((el)=>el.weather[0].description))
+        (FilteredData.map((el)=>el.weather[0].description))
       ,
     datasets: [{
         type: 'bar',
-        label: 'Bar Dataset',
-        data: (HourlyData.map((el)=>el.pop * 100)),
+        label: 'POP',
+        data: (FilteredData.map((el)=>el.pop * 200)),
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'lightgreen'
       }, {
         type: 'line',
-        label: 'Line Dataset',
-        data: (HourlyData.map((el)=>el.temp)),
+        label: 'Temperature',
+        data: (FilteredData.map((el)=>el.temp)),
         fill: true,
         borderColor: 'rgb(54, 162, 235)',
       }]
