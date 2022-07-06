@@ -65,7 +65,9 @@ function App() {
   console.log("FetchByIdData", FetchByIdData);
   console.log("EventData", EventData);
   console.log("DailyData", DailyData);
-
+  useEffect(() => {
+    
+  }, [showdrop])
   return (
     <div className="App">
       <Search
@@ -82,7 +84,7 @@ function App() {
         FetchByIdData={FetchByIdData}
         EventData={EventData}
       />
-      {HourlyData && <ForeCast HourlyData={HourlyData} DailyData={DailyData} />}
+     <ForeCast HourlyData={HourlyData} DailyData={DailyData} showdrop={showdrop} />
     </div>
   );
 }

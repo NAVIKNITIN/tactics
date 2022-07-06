@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import HourGraph from "./HourGraph";
-import DaysForeCast from "./DaysForeCast";
 import moment from "moment";
 
-const ForeCast = ({ HourlyData, DailyData }) => {
+const ForeCast = ({ HourlyData, DailyData ,showdrop}) => {
   const [visibleDayForeCast, setVisibleDayForeCast] = useState(false);
   var CurrentFormatedDate = moment().format("MMMM Do YYYY, h:mm:ss a");
   const [Data, setData] = useState("");
@@ -19,6 +18,9 @@ const ForeCast = ({ HourlyData, DailyData }) => {
     setData("");
     setclassActive("");
   };
+  useEffect(() => {
+    
+  }, [HourlyData])
 
   console.log(Data, `Data`);
   if (HourlyData) {
@@ -76,7 +78,8 @@ const ForeCast = ({ HourlyData, DailyData }) => {
                                     style={{ height: "50px", width: "50px" }}
                                     src={`http://openweathermap.org/img/wn/${el.weather[0].icon}@2x.png`}
                                   ></img>
-                                  {Math.round(el.temp.max)}/{`${Math.round(el.temp.min)} \xB0C`}
+                                  {Math.round(el.temp.max)}/
+                                  {`${Math.round(el.temp.min)} \xB0C`}
                                 </div>
                                 <div className="col-md-4">
                                   {el.weather[0].description}
@@ -156,21 +159,23 @@ const ForeCast = ({ HourlyData, DailyData }) => {
                   <div className="CurrentDataMain">
                     <img
                       alt={Data.name}
-                      style={{ height: "60px", width: "50px" }}
+                      style={{ height: "50px", width: "50px" }}
                       src={`http://openweathermap.org/img/wn/${Data.weather[0].icon}@2x.png`}
                     ></img>
-                    <h5>{Data.weather[0].description}.</h5>
+                    <div>
+                      <h5 className="p-2 d-flex">
+                        {Data.weather[0].description}.
+                      </h5>
+                      <p>
+                        The high will be {Math.round(Data.temp.max)}°C, the low
+                        will be {Math.round(Data.temp.min)}°C.
+                      </p>
+                    </div>
                   </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      flexDirection: "column",
-                    }}
-                  >
+                  <div>
                     <div
                       className="d-flex"
-                      style={{ justifyContent: "center", gap: "2rem" }}
+                      style={{marginLeft:"6rem",gap: "2rem" }}
                     >
                       <p className="m-0">
                         {Data.wind_speed ? `${Data.wind_speed}m/s  ` : ""}
@@ -182,24 +187,63 @@ const ForeCast = ({ HourlyData, DailyData }) => {
                     </div>
                     <div
                       className="d-flex"
-                      style={{ justifyContent: "center", gap: "2rem" }}
+                      style={{marginLeft:"6rem",gap: "2rem" }}
                     >
                       <p className="m-0">
                         Humidity:
                         {Data.humidity ? ` ${Data.humidity}%` : ""}
                       </p>
-                      <p className=" m-0">UV:{Data.uvi ? Data.uvi : ""}</p>
+                      <p className=" m-0">UV: {Data.uvi ? Data.uvi : ""}</p>
                     </div>
                     <div
                       className="d-flex"
-                      style={{ justifyContent: "center", gap: "2rem" }}
+                      style={{marginLeft:"6rem",gap: "2rem" }}
                     >
                       <p className="m-0">
                         Dew point:{Data.dew_point ? Data.dew_point : ""}
                       </p>
-                      <p className="m-0">
-                        Visibility : {Data.visibility ? Data.visibility : ""}
-                      </p>
+                    </div>
+                    
+                    <div className="col-md-8" style={{ marginLeft: "5rem" }}>
+                      <center>
+                        <table className="table table-hover">
+                          <thead>
+                            <tr>
+                              <th></th>
+                              <th>Morning</th>
+                              <th>Afternoon</th>
+                              <th>Evening</th>
+                              <th>Night</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th>TEMPERATURE</th>
+                              <td>{Data.temp.morn}</td>
+                              <td>{Data.temp.day}</td>
+                              <td>{Data.temp.eve}</td>
+                              <td>{Data.temp.night}</td>
+                            </tr>
+                            <tr>
+                              <th>FEELS LIKE</th>
+                              <td>{Data.feels_like.morn}</td>
+                              <td>{Data.feels_like.day}</td>
+                              <td>{Data.feels_like.eve}</td>
+                              <td>{Data.feels_like.night}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </center>
+                    </div>
+                    <div className="d-flex" style={{ marginLeft: "5rem" ,justifyContent:"left",gap:"2rem" }}>
+                      <div>
+                        <small>SUNRISE</small>
+                        <p>{moment(Data.sunrise).format("h:mm a")}</p>
+                      </div>
+                      <div>
+                        <small>SUNSET</small>
+                        <p>{moment(Data.sunset).format("h:mm a")}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -207,7 +251,6 @@ const ForeCast = ({ HourlyData, DailyData }) => {
             )}
           </div>
         </div>
-        <DaysForeCast DailyData={DailyData} />
       </div>
     );
   } else {

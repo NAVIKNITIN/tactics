@@ -75,3 +75,8 @@
 .accordion-item ::-webkit-scrollbar{
   display: none;
 }
+
+.CurrentDataMain{
+  display: flex;
+  margin-left: 5rem;
+}
