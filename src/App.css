@@ -55,3 +55,16 @@
 .dropdown:hover .dropdown-content {
   display: block;
 } */
+.Nav-btn{
+  border:none;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+  margin:5px;
+  height: fit-content;
+}
+.Nav-Head{
+  height: 2rem;
+}

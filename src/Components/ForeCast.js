@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from "react";
 import HourGraph from "./HourGraph";
 import DaysForeCast from "./DaysForeCast";
+import moment from "moment";
 
 const ForeCast = ({ HourlyData, DailyData }) => {
+  const [visibleDayForeCast, setVisibleDayForeCast] = useState(false);
+  var CurrentFormatedDate = moment().format("MMMM Do YYYY, h:mm:ss a");
+  const [Data, setData] = useState("");
+
+  const handleAccordion = (e, el) => {
+    console.log(el);
+    setData(el);
+  };
+
+  console.log(DailyData);
   if (HourlyData) {
     return (
       <div className="d-flex">
@@ -22,94 +33,110 @@ const ForeCast = ({ HourlyData, DailyData }) => {
             8-days forecast
           </h3>
           <div>
-            <div
-              className="accordion accordion-flush"
-              id="accordionFlushExample"
-            >
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="flush-headingOne">
-                  <button
-                    className="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseOne"
-                    aria-expanded="false"
-                    aria-controls="flush-collapseOne"
-                  >
-                    Accordion Item #1
-                  </button>
-                </h2>
-                <div
-                  id="flush-collapseOne"
-                  className="accordion-collapse collapse"
-                  aria-labelledby="flush-headingOne"
-                  data-bs-parent="#accordionFlushExample"
-                >
-                  <div className="accordion-body">
-                    Placeholder content for this accordion, which is intended to
-                    demonstrate the <code>.accordion-flush</code> class. This is
-                    the first item's accordion body.
+            {/* Accordion */}
+            {!Data && (
+              <div
+                className="accordion accordion-flush display-none"
+                id="accordionFlushExample"
+              >
+                {DailyData
+                  ? DailyData.map((el, key) => {
+                      return (
+                        <div className="accordion-item">
+                          <h2
+                            className="accordion-header"
+                            id={`flush-heading${key}`}
+                          >
+                            <button
+                              className="accordion-button collapsed"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target={`#flush-collapse${key}`}
+                              aria-expanded="false"
+                              aria-controls={`#flush-collapse${key}`}
+                              onClick={(e) => handleAccordion(e, el)}
+                            >
+                              {moment(Data.dt).format("MMM D, h:mm:ss a")}
+                            </button>
+                          </h2>
+                        </div>
+                      );
+                    })
+                  : ""}
+              </div>
+            )}
+            {Data ? (
+              <div className="scrolling-container-header" >
+                <ul className="options-scroller">
+                  {DailyData.map((el, key) => {
+                    return (
+                    <button className="Nav-btn" id={key} onClick={e=>{
+                      setData(el);
+                      
+                    }}>{moment(el.dt).format("MMM D, h:mm a")}</button>)
+                  })}
+                </ul>
+              </div>
+            ) : (
+              ""
+            )}
+            {/* Selected element */}
+            {Data && (
+              <div>
+                <button></button>
+                <div>
+                  <div className="CurrentDataMain">
+                    <h6>
+                      Feels like{" "}
+                      {`${Math.round(Data.feels_like)}\xB0C. ${
+                        Data.weather[0].description
+                      }`}
+                    </h6>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        flexDirection: "column",
+                      }}
+                    >
+                      <div
+                        className="d-flex"
+                        style={{ justifyContent: "center", gap: "2rem" }}
+                      >
+                        <p className="m-0">
+                          {Data.wind_speed ? `${Data.wind_speed}m/s  ` : ""}
+                          WSW
+                        </p>
+                        <p className="m-0">
+                          {Data.pressure ? `${Data.pressure}h ` : ""}Pa
+                        </p>
+                      </div>
+                      <div
+                        className="d-flex"
+                        style={{ justifyContent: "center", gap: "2rem" }}
+                      >
+                        <p className="m-0">
+                          Humidity:
+                          {Data.humidity ? ` ${Data.humidity}%` : ""}
+                        </p>
+                        <p className=" m-0">UV:{Data.uvi ? Data.uvi : ""}</p>
+                      </div>
+                      <div
+                        className="d-flex"
+                        style={{ justifyContent: "center", gap: "2rem" }}
+                      >
+                        <p className="m-0">
+                          Dew point:{Data.dew_point ? Data.dew_point : ""}
+                        </p>
+                        <p className="m-0">
+                          Visibility : {Data.visibility ? Data.visibility : ""}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="flush-headingTwo">
-                  <button
-                    className="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseTwo"
-                    aria-expanded="false"
-                    aria-controls="flush-collapseTwo"
-                  >
-                    Accordion Item #2
-                  </button>
-                </h2>
-                <div
-                  id="flush-collapseTwo"
-                  className="accordion-collapse collapse"
-                  aria-labelledby="flush-headingTwo"
-                  data-bs-parent="#accordionFlushExample"
-                >
-                  <div className="accordion-body">
-                    Placeholder content for this accordion, which is intended to
-                    demonstrate the <code>.accordion-flush</code> class. This is
-                    the second item's accordion body. Let's imagine this being
-                    filled with some actual content.
-                  </div>
-                </div>
-              </div>
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="flush-headingThree">
-                  <button
-                    className="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseThree"
-                    aria-expanded="false"
-                    aria-controls="flush-collapseThree"
-                  >
-                    Accordion Item #3
-                  </button>
-                </h2>
-                <div
-                  id="flush-collapseThree"
-                  className="accordion-collapse collapse"
-                  aria-labelledby="flush-headingThree"
-                  data-bs-parent="#accordionFlushExample"
-                >
-                  <div className="accordion-body">
-                    Placeholder content for this accordion, which is intended to
-                    demonstrate the <code>.accordion-flush</code> class. This is
-                    the third item's accordion body. Nothing more exciting
-                    happening here in terms of content, but just filling up the
-                    space to make it look, at least at first glance, a bit more
-                    representative of how this would look in a real-world
-                    application.
-                  </div>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </div>
         <DaysForeCast DailyData={DailyData} />

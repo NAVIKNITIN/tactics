@@ -15,6 +15,7 @@ const Current = ({ currentData, FetchByIdData, EventData }) => {
           </h3>
           <h1>
             <img
+            alt={FetchByIdData.name}
               src={`http://openweathermap.org/img/wn/${currentData.weather[0].icon}@2x.png`}
             ></img>
             {`${Math.round(currentData.temp)}\xB0C`}
@@ -91,9 +92,7 @@ const Current = ({ currentData, FetchByIdData, EventData }) => {
       </div>
     );
   } else {
-    return (
-        <Loader />
-            );
+    return <Loader />;
   }
 };
 
