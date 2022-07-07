@@ -1,9 +1,8 @@
 import React from "react";
 import moment from "moment";
 import Loader from "./Loader";
-const Current = ({ currentData, FetchByIdData, EventData }) => {
-  console.log(EventData);
 
+const Current = ({ currentData, FetchByIdData, EventData }) => {
   if (currentData) {
     var CurrentFormatedDate = moment().format("MMMM Do YYYY, h:mm:ss a");
     return (
@@ -15,7 +14,7 @@ const Current = ({ currentData, FetchByIdData, EventData }) => {
           </h3>
           <h1>
             <img
-            alt={FetchByIdData.name}
+              alt={FetchByIdData.name}
               src={`http://openweathermap.org/img/wn/${currentData.weather[0].icon}@2x.png`}
             ></img>
             {`${Math.round(currentData.temp)}\xB0C`}
@@ -33,7 +32,7 @@ const Current = ({ currentData, FetchByIdData, EventData }) => {
             </button>
           )}
 
-          <div >
+          <div>
             <h6>
               Feels like{" "}
               {`${Math.round(currentData.feels_like)}\xB0C. ${

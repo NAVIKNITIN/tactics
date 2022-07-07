@@ -32,10 +32,12 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
+
 /* 
 .dropdown {
   position: relative;
@@ -55,28 +57,30 @@
 .dropdown:hover .dropdown-content {
   display: block;
 } */
-.Nav-btn{
-  border:none;
+.Nav-btn {
+  border: none;
   border-radius: 0.5rem;
   -webkit-border-radius: 0.5rem;
   -moz-border-radius: 0.5rem;
   -ms-border-radius: 0.5rem;
   -o-border-radius: 0.5rem;
-  margin:5px;
+  margin: 5px;
   height: fit-content;
 }
-.Nav-Head{
+
+.Nav-Head {
   height: 2rem;
 }
-.btn-active{
+
+.btn-active {
   font-weight: 700;
 }
 
-.accordion-item ::-webkit-scrollbar{
+.accordion-item ::-webkit-scrollbar {
   display: none;
 }
 
-.CurrentDataMain{
+.CurrentDataMain {
   display: flex;
   margin-left: 5rem;
 }

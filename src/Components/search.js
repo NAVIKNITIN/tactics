@@ -1,54 +1,58 @@
 import React from "react";
-import { useState } from "react";
-import { fetchById, fetchCountry } from "../API/weatherApi";
 
-const Search = ({onSubmitSearch,onSelectCity,setText,text,showdrop,selectedCountry,city}) => {
- 
+const Search = ({
+  onSubmitSearch,
+  onSelectCity,
+  setText,
+  text,
+  showdrop,
+  selectedCountry,
+  city,
+}) => {
   return (
     <div className="row justify-content-center grid-container mb-4 p-2">
       <div className="col-md-12 ">
         <div
-        className="col-md-8"
+          className="col-md-8"
           style={{
             display: "grid",
             gridAutoFlow: "column",
-            
           }}
         >
-            <div></div>
-            <div >
+          <div></div>
+          <div>
             <input
-            type="search"
-            placeholder="enter to search"
-            className="form-control mt-4  ml-4 col-md-4"
-            name="searchvideo"
-            value={text}
-            style={{height:"40px"}}
-            onChange={(e) => setText(e.target.value)}
-          ></input>
-           {showdrop && (
-            <>
-              <select
-                className="ml-3 col-md-10 form-control"
-                placeholder="Country"
-                value={selectedCountry}
-                onChange={(e) => onSelectCity(e)}
-              >
-                <option>--Choose Country--</option>
-                {city &&
-                  city.map((value, key) => {
-                    // console.log(value)
-                    return (
-                      <option value={value.id} key={key}>
-                        {value.name}
-                      </option>
-                    );
-                  })}
-              </select>
-            </>
-          )}
-            </div>
-          
+              type="search"
+              placeholder="enter to search"
+              className="form-control mt-4  ml-4 col-md-4"
+              name="searchvideo"
+              value={text}
+              style={{ height: "40px" }}
+              onChange={(e) => setText(e.target.value)}
+            ></input>
+            {showdrop && (
+              <>
+                <select
+                  className="ml-3 col-md-10 form-control"
+                  placeholder="Country"
+                  value={selectedCountry}
+                  onChange={(e) => onSelectCity(e)}
+                >
+                  <option>--Choose Country--</option>
+                  {city &&
+                    city.map((value, key) => {
+                      // console.log(value)
+                      return (
+                        <option value={value.id} key={key}>
+                          {value.name}
+                        </option>
+                      );
+                    })}
+                </select>
+              </>
+            )}
+          </div>
+
           <button
             className="btn btn-primary mt-4 col-md-3"
             onClick={(e) => onSubmitSearch(e)}
@@ -57,9 +61,7 @@ const Search = ({onSubmitSearch,onSelectCity,setText,text,showdrop,selectedCount
             Search
           </button>
         </div>
-        <div style={{ }}>
-         
-        </div>
+        <div style={{}}></div>
       </div>
     </div>
   );

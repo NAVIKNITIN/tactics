@@ -1,7 +1,7 @@
 import "./App.css";
 import Search from "./Components/search";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { fetchById, fetchByLatLon, fetchCountry } from "./API/weatherApi";
 import Current from "./Components/Current";
 import ForeCast from "./Components/ForeCast";
@@ -14,7 +14,6 @@ function App() {
   const [currentData, setCurrentData] = useState();
   const [HourlyData, setHourlyData] = useState();
   const [DailyData, setDailyData] = useState();
-
   const [FetchByIdData, setFetchByIdData] = useState();
   const [EventData, setEventData] = useState();
   const [initial, setInitial] = useState(true);
@@ -32,6 +31,7 @@ function App() {
     setShowDrop(false);
     setText("");
   };
+
   if (initial) {
     FetchInitialData();
   }
@@ -47,7 +47,7 @@ function App() {
       setShowDrop(true);
     }
   };
-  console.log(showdrop);
+  
   const onSelectCity = async (e) => {
     setSelectedCountry(e.target.value);
     let response = await fetchById(e.target.value);
@@ -60,14 +60,6 @@ function App() {
     setText("");
   };
 
-  console.log("currentData", currentData);
-  console.log("HourlyData", HourlyData);
-  console.log("FetchByIdData", FetchByIdData);
-  console.log("EventData", EventData);
-  console.log("DailyData", DailyData);
-  useEffect(() => {
-    
-  }, [showdrop])
   return (
     <div className="App">
       <Search
@@ -84,7 +76,11 @@ function App() {
         FetchByIdData={FetchByIdData}
         EventData={EventData}
       />
-     <ForeCast HourlyData={HourlyData} DailyData={DailyData} showdrop={showdrop} />
+      <ForeCast
+        HourlyData={HourlyData}
+        DailyData={DailyData}
+        showdrop={showdrop}
+      />
     </div>
   );
 }

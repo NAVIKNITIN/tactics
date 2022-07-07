@@ -1,25 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import HourGraph from "./HourGraph";
 import moment from "moment";
 
-const ForeCast = ({ HourlyData, DailyData ,showdrop}) => {
-  const [visibleDayForeCast, setVisibleDayForeCast] = useState(false);
-  var CurrentFormatedDate = moment().format("MMMM Do YYYY, h:mm:ss a");
+const ForeCast = ({ HourlyData, DailyData, showdrop }) => {
   const [Data, setData] = useState("");
   const [classActive, setclassActive] = useState("");
 
   const handleAccordion = (e, el, key) => {
-    console.log(el);
     setData(el);
     setclassActive(key);
   };
+
   const handleAccordion2 = (e, el) => {
-    console.log(el);
     setData("");
     setclassActive("");
   };
 
-  console.log(Data, `Data`);
   if (HourlyData) {
     return (
       <div className="d-flex">
@@ -172,7 +168,7 @@ const ForeCast = ({ HourlyData, DailyData ,showdrop}) => {
                   <div>
                     <div
                       className="d-flex"
-                      style={{marginLeft:"6rem",gap: "2rem" }}
+                      style={{ marginLeft: "6rem", gap: "2rem" }}
                     >
                       <p className="m-0">
                         {Data.wind_speed ? `${Data.wind_speed}m/s  ` : ""}
@@ -184,7 +180,7 @@ const ForeCast = ({ HourlyData, DailyData ,showdrop}) => {
                     </div>
                     <div
                       className="d-flex"
-                      style={{marginLeft:"6rem",gap: "2rem" }}
+                      style={{ marginLeft: "6rem", gap: "2rem" }}
                     >
                       <p className="m-0">
                         Humidity:
@@ -194,13 +190,13 @@ const ForeCast = ({ HourlyData, DailyData ,showdrop}) => {
                     </div>
                     <div
                       className="d-flex"
-                      style={{marginLeft:"6rem",gap: "2rem" }}
+                      style={{ marginLeft: "6rem", gap: "2rem" }}
                     >
                       <p className="m-0">
                         Dew point:{Data.dew_point ? Data.dew_point : ""}
                       </p>
                     </div>
-                    
+
                     <div className="col-md-8" style={{ marginLeft: "5rem" }}>
                       <center>
                         <table className="table table-hover">
@@ -232,7 +228,14 @@ const ForeCast = ({ HourlyData, DailyData ,showdrop}) => {
                         </table>
                       </center>
                     </div>
-                    <div className="d-flex" style={{ marginLeft: "5rem" ,justifyContent:"left",gap:"2rem" }}>
+                    <div
+                      className="d-flex"
+                      style={{
+                        marginLeft: "5rem",
+                        justifyContent: "left",
+                        gap: "2rem",
+                      }}
+                    >
                       <div>
                         <small>SUNRISE</small>
                         <p>{moment(Data.sunrise).format("h:mm a")}</p>
