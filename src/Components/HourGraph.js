@@ -1,23 +1,25 @@
 import React from "react";
-import { Bar } from "react-chartjs-2";
-
+import { Chart as ChartJS } from 'chart.js/auto'
+import { Chart }            from 'react-chartjs-2'
 const HourGraph = ({ HourlyData }) => {
-  if (HourlyData !== undefined) {
-    let FilteredData = HourlyData.slice(0, 8);
+  console.log(HourlyData)
+  if (HourlyData) {
+    let filterData = HourlyData.slice(0, 8);
+    console.log(filterData)
     var datas = {
-      labels: FilteredData.map((el) => el.weather[0].description),
+      labels: filterData.map((el) =>el.weather[0].description),
       datasets: [
         {
           type: "bar",
           label: "POP",
-          data: FilteredData.map((el) => el.pop * 200),
+          data: filterData && filterData.map((el) => el.pop && el.pop * 200),
           borderColor: "rgb(255, 99, 132)",
           backgroundColor: "lightgreen",
         },
         {
           type: "line",
           label: "Temperature",
-          data: FilteredData.map((el) => el.temp),
+          data:filterData && filterData.map((el) => el.temp && el.temp),
           fill: true,
           borderColor: "rgb(54, 162, 235)",
         },
@@ -39,11 +41,11 @@ const HourGraph = ({ HourlyData }) => {
   return (
     <div className="chartjs">
       <div className="bar">
-        <Bar
+        <Chart
           data={datas}
           style={{ width: "100%", overflow: "scroll" }}
           options={datas.options}
-        ></Bar>
+        ></Chart>
       </div>
     </div>
   );

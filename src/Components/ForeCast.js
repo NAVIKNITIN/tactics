@@ -16,7 +16,7 @@ const ForeCast = ({ HourlyData, DailyData, showdrop }) => {
     setclassActive("");
   };
 
-  if (HourlyData) {
+  if (HourlyData && DailyData) {
     return (
       <div className="d-flex">
         <div className="chartjs col-md-6">
@@ -25,7 +25,7 @@ const ForeCast = ({ HourlyData, DailyData, showdrop }) => {
               Hourly Forecast
             </h3>
             <div style={{ display: "grid", marginLeft: "3rem" }}>
-              <HourGraph HourlyData={HourlyData} />
+              {DailyData &&<HourGraph HourlyData={HourlyData} />}
             </div>
           </div>
         </div>

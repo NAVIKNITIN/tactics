@@ -20,7 +20,6 @@ function App() {
 
   const FetchInitialData = async () => {
     setInitial(false);
-
     let response = await fetchById();
     setFetchByIdData(response);
     let res2 = await fetchByLatLon(response);
@@ -76,11 +75,13 @@ function App() {
         FetchByIdData={FetchByIdData}
         EventData={EventData}
       />
+      {HourlyData && DailyData &&
       <ForeCast
         HourlyData={HourlyData}
         DailyData={DailyData}
         showdrop={showdrop}
       />
+}
     </div>
   );
 }
